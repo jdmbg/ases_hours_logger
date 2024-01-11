@@ -27,7 +27,7 @@ To run the script, follow these steps:
 1. Install the required dependencies:
 
     ```bash
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
     ```
 
 2. Adjust your settings in the `settings.json` file:
