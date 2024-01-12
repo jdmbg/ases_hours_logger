@@ -1,2 +1,5 @@
 # No JSON Files
 *.json
+
+#Python Cache
+__pycache__
