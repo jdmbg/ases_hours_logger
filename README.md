@@ -6,6 +6,8 @@
 
 This tool is designed to streamline the process of booking work hours for employees using the [ASES tool from ATOSS](https://www.atoss.com/en). It is optimized for websites in German.
 
+![demo-gif](assets/demo.gif)
+
 ### Key Features
 
 - **Time-Saving Automation:** The tool automates the process of logging hours, aiming to save employees valuable time.
