@@ -2,6 +2,7 @@ import sys
 import json
 import time
 from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
 from utils import login, go_to_log_hours_page, fill_out_table
 
 
@@ -51,6 +52,16 @@ def main():
         go_to_log_hours_page(browser)
         fill_out_table(browser, TIME_SLOTS, BUFFER_TIME)
         time.sleep(FINAL_WAIT_IN_SEC)
+    except WebDriverException as e:
+        if "net::ERR_NAME_NOT_RESOLVED" in str(e):
+            print("\nCaught net::ERR_NAME_NOT_RESOLVED exception."
+                  "\nPlease check your internet connection or the "
+                  "provided ASES_URL.\nYou may also need to connect "
+                  "to your employer's VPN network.\n")
+
+        else:
+            print(f"Caught WebDriverException: {e}")
+
     finally:
         browser.quit()
 
