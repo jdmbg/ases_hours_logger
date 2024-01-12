@@ -37,13 +37,16 @@ To run the script, follow these steps:
     - **BUFFER_TIME**: The time that passes between each browser action. We need a bit of time between actions for performance reasons. Only adjust if needed, for example, if your internet connection is slow. The default is 0.3 seconds.
     - **FINAL_WAIT_IN_SEC**: The time that the browser window will remain open after completing all booking actions. The default is 60 seconds.
 
-3. Run the script:
+3. Connect to your employers VPN if necessary.
+
+4. Run the script:
 
     ```bash
     python3 hour_logger.py "ASES_USERNAME" "ASES_PASSWORD"
     ```
 
-4. See the magic happen 🧙.
-5. Ensure everything was logged correctly and **manually click on the "SAVE" button**.
+5. See the magic happen 🧙.
+
+6. Ensure everything was logged correctly and **manually click on the "SAVE" button**.
 
 Feel free to customize the settings to match your specific needs. If you encounter any issues, consider adjusting the waiting times or reaching out for support. Happy logging!
