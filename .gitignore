@@ -1,0 +1,9 @@
+# OS junk files
+[Tt]humbs.db
+*.DS_Store
+
+# No JSON Files
+*.json
+
+#Python Cache
+__pycache__
