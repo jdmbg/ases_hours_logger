@@ -7,7 +7,10 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 
 
-def login(browser: webdriver, username: str, password: str):
+def login(browser: webdriver,
+          username: str,
+          password: str,
+          drop_down_index: int):
     # Wait for the iframe to be present on the page
     iframe = WebDriverWait(browser, 10).until(
         EC.presence_of_element_located((By.ID, 'applicationIframe'))
@@ -29,8 +32,8 @@ def login(browser: webdriver, username: str, password: str):
     password_field.send_keys(password)
     drop_down.click()
 
-    # Press the down arrow 5 times to reach the 6th item
-    for _ in range(5):
+    # Press the down arrow drop_down_index times to reach the desired item
+    for _ in range(drop_down_index):
         drop_down.send_keys(Keys.ARROW_DOWN)
     drop_down.send_keys(Keys.ENTER)
     login_button.click()

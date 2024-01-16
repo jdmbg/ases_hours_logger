@@ -1,7 +1,6 @@
 {
   "ASES_URL": "your_ases_url",
-  "BUFFER_TIME": 0.3,
-  "FINAL_WAIT_IN_SEC": 60,
+  "LOGIN_DROP_DOWN_INDEX": 5,
   "TIME_SLOTS": {
     "Mo": [
       "8:00",
@@ -32,6 +31,8 @@
       "12:00",
       "13:00",
       "16:00"
-    ]
+    ],
+  "BUFFER_TIME": 0.3,
+  "FINAL_WAIT_IN_SEC": 60
   }
 }

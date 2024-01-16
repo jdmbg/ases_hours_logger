@@ -32,12 +32,15 @@ To run the script, follow these steps:
     pip3 install -r requirements.txt
     ```
 
-2. Adjust your settings in the `settings.json` file:
+2. Create your settings file as `settings.json`. You can use `settings.json.example` as a template. Adjust the following setting parameters:
 
-    - **ASES_URL**: The URL to access the ASES webpage of your employer.
-    - **TIME_SLOTS**: Define the time slots you want to log. These assume an 8-hour shift with a 1-hour lunch break each day. On Fridays only 7 hours are booked. You can adjust this at will.
-    - **BUFFER_TIME**: The time that passes between each browser action. We need a bit of time between actions for performance reasons. Only adjust if needed, for example, if your internet connection is slow. The default is 0.3 seconds.
-    - **FINAL_WAIT_IN_SEC**: The time that the browser window will remain open after completing all booking actions. The default is 60 seconds.
+    | Key  | Description | Default |
+    |------|-------------|---------|
+    | `ASES_URL` | The URL to access the ASES webpage of your employer | `your_ases_url` |
+    | `LOGIN_DROP_DOWN_INDEX` | Index of the item to be selected in the login page drop down menu | `5` |
+    | `TIME_SLOTS` | Define the time slots you want to log. These assume an 8-hour shift with a 1-hour lunch break each day. On Fridays only 7 hours are booked. You can adjust this at will | see `settings.json.example` file |
+    | `BUFFER_TIME` | The time in seconds that passes between each browser action. We need a bit of time between actions for performance reasons. Only adjust if needed, for example, if your internet connection is slow | `0.3` |
+    | `FINAL_WAIT_IN_SEC` | The time in seconds that the browser window will remain open after completing all booking actions | `60` |
 
 3. Connect to your employers VPN if necessary.
 

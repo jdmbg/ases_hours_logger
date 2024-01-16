@@ -24,6 +24,7 @@ def load_settings():
     # Access the settings data
     if None in (data.get("ASES_URL"),
                 data.get("BUFFER_TIME"),
+                data.get("LOGIN_DROP_DOWN_INDEX"),
                 data.get("FINAL_WAIT_IN_SEC"),
                 data.get("TIME_SLOTS")):
         print("Error: Invalid or missing settings in the configuration file.")
@@ -41,6 +42,7 @@ def main():
     settings = load_settings()
     ASES_URL = settings.get("ASES_URL")
     BUFFER_TIME = settings.get("BUFFER_TIME")
+    LOGIN_DROP_DOWN_INDEX = settings.get("LOGIN_DROP_DOWN_INDEX")
     FINAL_WAIT_IN_SEC = settings.get("FINAL_WAIT_IN_SEC")
     TIME_SLOTS = settings.get("TIME_SLOTS")
 
@@ -48,7 +50,7 @@ def main():
 
     try:
         browser.get(ASES_URL)
-        login(browser, USERNAME, PASSWORD)
+        login(browser, USERNAME, PASSWORD, LOGIN_DROP_DOWN_INDEX)
         go_to_log_hours_page(browser)
         fill_out_table(browser, TIME_SLOTS, BUFFER_TIME)
         time.sleep(FINAL_WAIT_IN_SEC)
