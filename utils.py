@@ -8,6 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 def login(browser: webdriver,
+          ases_url: str,
           username: str,
           password: str,
           drop_down_index: int):
@@ -32,10 +33,12 @@ def login(browser: webdriver,
     password_field.send_keys(password)
     drop_down.click()
 
-    # Press the down arrow drop_down_index times to reach the desired item
-    for _ in range(drop_down_index):
-        drop_down.send_keys(Keys.ARROW_DOWN)
-    drop_down.send_keys(Keys.ENTER)
+    # If ClientNo not specified in the ases_url -> select manually
+    if "ClientNo" not in ases_url:
+        # Press the down arrow drop_down_index times to reach the desired item
+        for _ in range(drop_down_index):
+            drop_down.send_keys(Keys.ARROW_DOWN)
+        drop_down.send_keys(Keys.ENTER)
     login_button.click()
 
 
