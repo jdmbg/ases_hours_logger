@@ -26,7 +26,8 @@ def load_settings():
                 data.get("BUFFER_TIME"),
                 data.get("LOGIN_DROP_DOWN_INDEX"),
                 data.get("FINAL_WAIT_IN_SEC"),
-                data.get("TIME_SLOTS")):
+                data.get("TIME_SLOTS"),
+                data.get("AUTOSAVE")):
         print("Error: Invalid or missing settings in the configuration file.")
         sys.exit(1)
 
@@ -45,6 +46,7 @@ def main():
     LOGIN_DROP_DOWN_INDEX = settings.get("LOGIN_DROP_DOWN_INDEX")
     FINAL_WAIT_IN_SEC = settings.get("FINAL_WAIT_IN_SEC")
     TIME_SLOTS = settings.get("TIME_SLOTS")
+    AUTOSAVE = settings.get("AUTOSAVE")
 
     browser = webdriver.Chrome()
 
@@ -52,7 +54,9 @@ def main():
         browser.get(ASES_URL)
         login(browser, ASES_URL, USERNAME, PASSWORD, LOGIN_DROP_DOWN_INDEX)
         go_to_log_hours_page(browser)
-        fill_out_table(browser, TIME_SLOTS, BUFFER_TIME)
+        fill_out_table(browser, TIME_SLOTS, BUFFER_TIME, AUTOSAVE)
+
+        print(f"Waiting {FINAL_WAIT_IN_SEC} before closing window.")
         time.sleep(FINAL_WAIT_IN_SEC)
     except WebDriverException as e:
         if "net::ERR_NAME_NOT_RESOLVED" in str(e):

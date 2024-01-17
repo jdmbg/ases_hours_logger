@@ -62,7 +62,10 @@ def send_keys_and_wait(actions: ActionChains, keys: str, buffer_time: int):
     actions.pause(buffer_time)
 
 
-def fill_out_table(browser: webdriver, time_slots: dict, buffer_time: int):
+def fill_out_table(browser: webdriver,
+                   time_slots: dict,
+                   buffer_time: int,
+                   autosave: bool):
 
     # Locate the table element
     table = WebDriverWait(browser, 10).until(
@@ -124,4 +127,12 @@ def fill_out_table(browser: webdriver, time_slots: dict, buffer_time: int):
             actions.perform()
             time.sleep(buffer_time)
 
-            print("DONE\n")
+    if autosave:
+        save_button_xpath = '//a[@class="z-toolbarbutton" and \
+            .//span[contains(text(), "Speichern")]]'
+        save_button = WebDriverWait(browser, 10).until(
+            EC.element_to_be_clickable((By.XPATH, save_button_xpath)))
+        save_button.click()
+        print("\nSaved changes. Done.")
+    else:
+        print("\nDone with booking. Please click on the save button.")

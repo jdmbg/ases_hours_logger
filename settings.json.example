@@ -1,6 +1,7 @@
 {
   "ASES_URL": "your_ases_url",
   "LOGIN_DROP_DOWN_INDEX": 5,
+  "AUTOSAVE": false,
   "TIME_SLOTS": {
     "Mo": [
       "8:00",
