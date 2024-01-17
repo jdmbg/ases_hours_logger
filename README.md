@@ -55,3 +55,5 @@ To run the script, follow these steps:
 6. Ensure everything was logged correctly and **manually click on the "SAVE" button**.
 
 Feel free to customize the settings to match your specific needs. If you encounter any issues, consider adjusting the waiting times or reaching out for support. Happy logging!
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/jdmbg)
