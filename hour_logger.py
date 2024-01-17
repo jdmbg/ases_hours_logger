@@ -50,7 +50,7 @@ def main():
 
     try:
         browser.get(ASES_URL)
-        login(browser, USERNAME, PASSWORD, LOGIN_DROP_DOWN_INDEX)
+        login(browser, ASES_URL, USERNAME, PASSWORD, LOGIN_DROP_DOWN_INDEX)
         go_to_log_hours_page(browser)
         fill_out_table(browser, TIME_SLOTS, BUFFER_TIME)
         time.sleep(FINAL_WAIT_IN_SEC)
