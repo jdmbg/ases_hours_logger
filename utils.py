@@ -30,12 +30,13 @@ def login(browser: webdriver,
     # Fill out form and login
     user_field.send_keys(username)
     password_field.send_keys(password)
-    drop_down.click()
+    if drop_down_index > 0:
+        drop_down.click()
 
-    # Press the down arrow drop_down_index times to reach the desired item
-    for _ in range(drop_down_index):
-        drop_down.send_keys(Keys.ARROW_DOWN)
-    drop_down.send_keys(Keys.ENTER)
+        # Press the down arrow drop_down_index times to reach the desired item
+        for _ in range(drop_down_index):
+            drop_down.send_keys(Keys.ARROW_DOWN)
+        drop_down.send_keys(Keys.ENTER)
     login_button.click()
 
 
