@@ -48,13 +48,15 @@ def go_to_log_hours_page(browser: webdriver):
         EC.element_to_be_clickable((By.ID, 'nav_menu'))
     )
     nav_menu.click()
+
     # Click on log_hours button
-    z_atoss_buttons = WebDriverWait(browser, 10).until(
-        EC.visibility_of_all_elements_located((By.CLASS_NAME, 'z-atossbutton'))
+    log_hours_page_button_xpath = "//span[@class='btn-label' \
+                and text()='Erfassen Zeitbuchung']"
+    log_hours_page_button = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.XPATH, log_hours_page_button_xpath))
     )
-    log_hours_page_button_ref = z_atoss_buttons[6]
     ActionChains(browser).move_to_element(
-        log_hours_page_button_ref).click().perform()
+        log_hours_page_button).click().perform()
 
 
 def send_keys_and_wait(actions: ActionChains, keys: str, buffer_time: int):
