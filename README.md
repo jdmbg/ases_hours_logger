@@ -42,7 +42,7 @@ To run the script, follow these steps:
     | `TIME_SLOTS` | Define the time slots you want to log. These assume an 8-hour shift with a 1-hour lunch break each day. On Fridays only 7 hours are booked. You can adjust this at will | see `settings.json.example` file |
     | `BUFFER_TIME` | The time in seconds that passes between each browser action. We need a bit of time between actions for performance reasons. Only adjust if needed, for example, if your internet connection is slow | `0.3` |
     | `FINAL_WAIT_IN_SEC` | The time in seconds that the browser window will remain open after completing all booking actions | `60` |
-    | `VERBOSE` | output of log messages for the developer mode to display more information during processing | `true` |
+    | `VERBOSE` | Set the output of log messages for the developer mode to display more information during processing | `true` |
 
 3. Connect to your employers VPN if necessary.
 
