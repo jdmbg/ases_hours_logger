@@ -7,3 +7,6 @@
 
 #Python Cache
 __pycache__
+
+# Some Custom Shell Scripts
+*.sh
