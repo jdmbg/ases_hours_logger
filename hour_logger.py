@@ -16,19 +16,52 @@ def load_credentials():
 
 
 def load_settings():
-    # Read settings
+    # Try to read the settings.json file
     json_file_path = "settings.json"
-    with open(json_file_path, "r") as json_file:
-        data = json.load(json_file)
+    
+    try:
+        with open(json_file_path, "r") as json_file:
+            data = json.load(json_file)
 
-    # Access the settings data
-    if None in (data.get("ASES_URL"),
-                data.get("BUFFER_TIME"),
-                data.get("LOGIN_DROP_DOWN_INDEX"),
-                data.get("FINAL_WAIT_IN_SEC"),
-                data.get("TIME_SLOTS"),
-                data.get("AUTOSAVE")):
-        print("Error: Invalid or missing settings in the configuration file.")
+    except FileNotFoundError:
+        print("Error: settings.json file not found.")
+        sys.exit(1)
+    
+    except json.JSONDecodeError:
+        print("Error: Invalid JSON format in the settings.json file.")
+        sys.exit(1)
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        sys.exit(1)
+
+    # Access and check all the settings data
+    if data.get("ASES_URL") is None:
+        print("Error: ASES_URL is missing in the settings.json file.")
+        sys.exit(1)
+
+    if data.get("BUFFER_TIME") is None:
+        print("Error: BUFFER_TIME is missing in the settings.json file.")
+        sys.exit(1)
+
+    if data.get("LOGIN_DROP_DOWN_INDEX") is None:
+        print("Error: LOGIN_DROP_DOWN_INDEX is missing in the settings.json file.")
+        sys.exit(1)
+        
+    if data.get("FINAL_WAIT_IN_SEC") is None:
+        print("Error: FINAL_WAIT_IN_SEC is missing in the settings.json file.")
+        sys.exit(1)
+        
+    if data.get("TIME_SLOTS") is None:
+        print("Error: TIME_SLOTS is missing in the settings.json file.")
+        sys.exit(1)
+        
+    if data.get("AUTOSAVE") is None:
+        print("Error: AUTOSAVE is missing in the settings.json file.")
+        sys.exit(1)
+        
+    if data.get("VERBOSE") is None:
+        print("Error: VERBOSE is missing in the settings.json file.")
         sys.exit(1)
 
     return data
@@ -47,6 +80,7 @@ def main():
     FINAL_WAIT_IN_SEC = settings.get("FINAL_WAIT_IN_SEC")
     TIME_SLOTS = settings.get("TIME_SLOTS")
     AUTOSAVE = settings.get("AUTOSAVE")
+    VERBOSE = settings.get("VERBOSE")
 
     browser = webdriver.Chrome()
 
@@ -54,7 +88,7 @@ def main():
         browser.get(ASES_URL)
         login(browser, ASES_URL, USERNAME, PASSWORD, LOGIN_DROP_DOWN_INDEX)
         go_to_log_hours_page(browser)
-        fill_out_table(browser, TIME_SLOTS, BUFFER_TIME, AUTOSAVE)
+        fill_out_table(browser, TIME_SLOTS, BUFFER_TIME, AUTOSAVE, VERBOSE)
 
         print(f"Waiting {FINAL_WAIT_IN_SEC} before closing window.")
         time.sleep(FINAL_WAIT_IN_SEC)

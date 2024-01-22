@@ -67,7 +67,8 @@ def send_keys_and_wait(actions: ActionChains, keys: str, buffer_time: int):
 def fill_out_table(browser: webdriver,
                    time_slots: dict,
                    buffer_time: int,
-                   autosave: bool):
+                   autosave: bool,
+                   verbose: bool):
 
     # Locate the table element
     table = WebDriverWait(browser, 10).until(
@@ -94,18 +95,18 @@ def fill_out_table(browser: webdriver,
         if (weekday_cell.text == 'Sa'
             or weekday_cell.text == 'So'
                 or absence_code_cell.text == 'U'):
-            print(
+            showMessage(verbose,
                 f"\nDay {date_cell.text} is in the weekend" +
                 " or a vacation day.\nIGNORED\n")
 
         # Ignore if already set
         elif (":" in from_cell.text):
-            print(
+            showMessage(verbose,
                 f"\nDay {date_cell.text} is already set.\nIGNORED\n")
 
         # Fill out table
         else:
-            print(
+            showMessage(verbose,
                 f"\nFilling out day {date_cell.text}" +
                 f" with {time_slots[weekday_cell.text]} ...")
 
@@ -138,3 +139,8 @@ def fill_out_table(browser: webdriver,
         print("\nSaved changes. Done.")
     else:
         print("\nDone with booking. Please click on the save button.")
+
+
+def showMessage(verbose: bool, msg: str):
+    if verbose:
+        print("\n", msg)
