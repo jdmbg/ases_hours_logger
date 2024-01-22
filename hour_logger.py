@@ -1,11 +1,22 @@
 import sys
 import json
 import time
-import getpass
-from selenium import webdriver
-from pykeepass import PyKeePass
-from selenium.common.exceptions import WebDriverException
 from utils import login, go_to_log_hours_page, fill_out_table
+
+
+# Check requirements have been installed
+try:
+    import getpass
+    from pykeepass import PyKeePass
+    from selenium import webdriver
+    from selenium.common.exceptions import WebDriverException
+except ModuleNotFoundError:
+    print("\nA required module was not found." +
+          "\nPlease run 'pip3 install -r requirements.txt'\n")
+    sys.exit(1)
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")
+    sys.exit(1)
 
 
 def load_credentials(use_keypass_credentials: bool,
