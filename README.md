@@ -40,17 +40,25 @@ To run the script, follow these steps:
     | `LOGIN_DROP_DOWN_INDEX` | Index of the item to be selected in the login page drop down menu | `5` |
     | `AUTOSAVE` | For automatically saving your changes after the script run set this to `true`. Do this at your own risk | `false` |
     | `TIME_SLOTS` | Define the time slots you want to log. These assume an 8-hour shift with a 1-hour lunch break each day. On Fridays only 7 hours are booked. You can adjust this at will | see `settings.json.example` file |
+    | `USE_KEEPASS_CREDENTIALS` | Boolean describing if KeePass credentials are to be used | `false` |
+    | `KEEPASS_DATABASE_PATH` | Path to your KeePass database .kdbx file | `your_keepass_database_path` |
+    | `KEEPASS_ENTRY_TITLE` | Title of the KeePass entry containing the user credentials | `your_keepass_ases_entry_title` |
     | `BUFFER_TIME` | The time in seconds that passes between each browser action. We need a bit of time between actions for performance reasons. Only adjust if needed, for example, if your internet connection is slow | `0.3` |
     | `FINAL_WAIT_IN_SEC` | The time in seconds that the browser window will remain open after completing all booking actions | `60` |
     | `VERBOSE` | Set the output of log messages for the developer mode to display more information during processing | `true` |
 
 3. Connect to your employers VPN if necessary.
 
-4. Run the script:
+4. Run the script. You can do this by giving the username and password as command line arguments:
 
     ```bash
     python3 hour_logger.py "ASES_USERNAME" "ASES_PASSWORD"
     ```
+    Or by using the credentials stored in your KeePass. Be sure to configure the setting parameters `USE_KEEPASS_CREDENTIALS`, `KEEPASS_DATABASE_PATH` and `KEEPASS_ENTRY_TITLE` accordingly. After this, run the following command:
+    ```bash
+    python3 hour_logger.py
+    ```
+    You will be asked to enter then the KeePass master password.
 
 5. See the magic happen 🧙.
 

@@ -3,6 +3,9 @@
   "LOGIN_DROP_DOWN_INDEX": 5,
   "AUTOSAVE": false,
   "VERBOSE": true,
+  "USE_KEEPASS_CREDENTIALS": false,
+  "KEEPASS_DATABASE_PATH": your_keepass_database_path,
+  "KEEPASS_ENTRY_TITLE": your_keepass_ases_entry_title,
   "TIME_SLOTS": {
     "Mo": [
       "8:00",
