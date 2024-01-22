@@ -4,7 +4,7 @@
   "AUTOSAVE": false,
   "VERBOSE": true,
   "USE_KEEPASS_CREDENTIALS": false,
-  "KEEPASS_DATABASE_PATH": your_keepass_database_path,
+  "KEEPASS_DATABASE_FILE_PATH": your_keepass_database_file_path,
   "KEEPASS_ENTRY_TITLE": your_keepass_ases_entry_title,
   "TIME_SLOTS": {
     "Mo": [

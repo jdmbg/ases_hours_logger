@@ -20,7 +20,7 @@ except Exception as e:
 
 
 def load_credentials(use_keypass_credentials: bool,
-                     keepass_database_path: str,
+                     keepass_database_file_path: str,
                      keepass_entry_title: str):
 
     if len(sys.argv) < 3 and use_keypass_credentials is False:
@@ -29,7 +29,7 @@ def load_credentials(use_keypass_credentials: bool,
     if use_keypass_credentials is True:
         # Get credentials from Keypass
         pswd = getpass.getpass('\nPlease enter your KeePass master password:')
-        kp = PyKeePass(keepass_database_path, password=pswd)
+        kp = PyKeePass(keepass_database_file_path, password=pswd)
         entry = kp.find_entries(title=keepass_entry_title, first=True)
         return entry.username, entry.password
     else:
@@ -61,7 +61,7 @@ def load_settings():
     settings_to_check = ["ASES_URL", "BUFFER_TIME", "LOGIN_DROP_DOWN_INDEX",
                          "FINAL_WAIT_IN_SEC", "TIME_SLOTS", "AUTOSAVE",
                          "VERBOSE", "USE_KEEPASS_CREDENTIALS",
-                         "KEEPASS_DATABASE_PATH", "KEEPASS_ENTRY_TITLE"]
+                         "KEEPASS_DATABASE_FILE_PATH", "KEEPASS_ENTRY_TITLE"]
 
     # Access and check all the settings data
     for setting in settings_to_check:
@@ -84,12 +84,12 @@ def main():
     AUTOSAVE = settings.get("AUTOSAVE")
     VERBOSE = settings.get("VERBOSE")
     USE_KEEPASS_CREDENTIALS = settings.get("USE_KEEPASS_CREDENTIALS")
-    KEEPASS_DATABASE_PATH = settings.get("KEEPASS_DATABASE_PATH")
+    KEEPASS_DATABASE_FILE_PATH = settings.get("KEEPASS_DATABASE_FILE_PATH")
     KEEPASS_ENTRY_TITLE = settings.get("KEEPASS_ENTRY_TITLE")
 
     # Load credentials
     USERNAME, PASSWORD = load_credentials(USE_KEEPASS_CREDENTIALS,
-                                          KEEPASS_DATABASE_PATH,
+                                          KEEPASS_DATABASE_FILE_PATH,
                                           KEEPASS_ENTRY_TITLE)
 
     browser = webdriver.Chrome()
