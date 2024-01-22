@@ -20,13 +20,22 @@ def login(browser: webdriver,
     browser.switch_to.frame(iframe)
 
     # Get necessary elements
-    input_fields = browser.find_elements(By.TAG_NAME, 'input')
-    buttons = browser.find_elements(By.TAG_NAME, "button")
+    user_field_xpath = "//input[@class='z-focustextbox-real' \
+        and @placeholder='Benutzername']"
+    user_field = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.XPATH, user_field_xpath)))
 
-    user_field = input_fields[0]
-    password_field = input_fields[1]
-    drop_down = input_fields[2]
-    login_button = buttons[1]
+    password_field_xpath = "//input[@class='z-focustextbox-real' \
+        and @placeholder='Kennwort']"
+    password_field = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.XPATH, password_field_xpath)))
+
+    drop_down_xpath = "//input[@placeholder='Mandant']"
+    drop_down = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.XPATH, drop_down_xpath)))
+
+    login_button = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "btn-login")))
 
     # Fill out form and login
     user_field.send_keys(username)
@@ -96,19 +105,19 @@ def fill_out_table(browser: webdriver,
             or weekday_cell.text == 'So'
                 or absence_code_cell.text == 'U'):
             showMessage(verbose,
-                f"\nDay {date_cell.text} is in the weekend" +
-                " or a vacation day.\nIGNORED\n")
+                        f"\nDay {date_cell.text} is in the weekend" +
+                        " or a vacation day.\nIGNORED\n")
 
         # Ignore if already set
         elif (":" in from_cell.text):
             showMessage(verbose,
-                f"\nDay {date_cell.text} is already set.\nIGNORED\n")
+                        f"\nDay {date_cell.text} is already set.\nIGNORED\n")
 
         # Fill out table
         else:
             showMessage(verbose,
-                f"\nFilling out day {date_cell.text}" +
-                f" with {time_slots[weekday_cell.text]} ...")
+                        f"\nFilling out day {date_cell.text}" +
+                        f" with {time_slots[weekday_cell.text]} ...")
 
             # Click on cell
             from_cell.click()
