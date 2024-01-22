@@ -1,24 +1,35 @@
 import sys
 import json
 import time
+import getpass
 from selenium import webdriver
+from pykeepass import PyKeePass
 from selenium.common.exceptions import WebDriverException
 from utils import login, go_to_log_hours_page, fill_out_table
 
 
-def load_credentials():
-    # Check the number of command-line arguments
-    if len(sys.argv) < 3:
+def load_credentials(use_keypass_credentials: bool,
+                     keepass_database_path: str,
+                     keepass_entry_title: str):
+
+    if len(sys.argv) < 3 and use_keypass_credentials is False:
         print('Usage: python script.py "USERNAME" "PASSWORD"')
         sys.exit(1)
-
-    return sys.argv[1], sys.argv[2]
+    if use_keypass_credentials is True:
+        # Get credentials from Keypass
+        pswd = getpass.getpass('\nPlease enter your KeePass master password:')
+        kp = PyKeePass(keepass_database_path, password=pswd)
+        entry = kp.find_entries(title=keepass_entry_title, first=True)
+        return entry.username, entry.password
+    else:
+        # Get credentials from command line arguments
+        return sys.argv[1], sys.argv[2]
 
 
 def load_settings():
     # Try to read the settings.json file
     json_file_path = "settings.json"
-    
+
     try:
         with open(json_file_path, "r") as json_file:
             data = json.load(json_file)
@@ -26,7 +37,7 @@ def load_settings():
     except FileNotFoundError:
         print("Error: settings.json file not found.")
         sys.exit(1)
-    
+
     except json.JSONDecodeError:
         print("Error: Invalid JSON format in the settings.json file.")
         sys.exit(1)
@@ -36,41 +47,21 @@ def load_settings():
         sys.exit(1)
 
     # Access and check all the settings data
-    if data.get("ASES_URL") is None:
-        print("Error: ASES_URL is missing in the settings.json file.")
-        sys.exit(1)
+    settings_to_check = ["ASES_URL", "BUFFER_TIME", "LOGIN_DROP_DOWN_INDEX",
+                         "FINAL_WAIT_IN_SEC", "TIME_SLOTS", "AUTOSAVE",
+                         "VERBOSE", "USE_KEEPASS_CREDENTIALS",
+                         "KEEPASS_DATABASE_PATH", "KEEPASS_ENTRY_TITLE"]
 
-    if data.get("BUFFER_TIME") is None:
-        print("Error: BUFFER_TIME is missing in the settings.json file.")
-        sys.exit(1)
-
-    if data.get("LOGIN_DROP_DOWN_INDEX") is None:
-        print("Error: LOGIN_DROP_DOWN_INDEX is missing in the settings.json file.")
-        sys.exit(1)
-        
-    if data.get("FINAL_WAIT_IN_SEC") is None:
-        print("Error: FINAL_WAIT_IN_SEC is missing in the settings.json file.")
-        sys.exit(1)
-        
-    if data.get("TIME_SLOTS") is None:
-        print("Error: TIME_SLOTS is missing in the settings.json file.")
-        sys.exit(1)
-        
-    if data.get("AUTOSAVE") is None:
-        print("Error: AUTOSAVE is missing in the settings.json file.")
-        sys.exit(1)
-        
-    if data.get("VERBOSE") is None:
-        print("Error: VERBOSE is missing in the settings.json file.")
-        sys.exit(1)
+    # Access and check all the settings data
+    for setting in settings_to_check:
+        if data.get(setting) is None:
+            print(f"Error: {setting} is missing in the settings.json file.")
+            sys.exit(1)
 
     return data
 
 
 def main():
-
-    # Load credentials
-    USERNAME, PASSWORD = load_credentials()
 
     # Load settings
     settings = load_settings()
@@ -81,6 +72,14 @@ def main():
     TIME_SLOTS = settings.get("TIME_SLOTS")
     AUTOSAVE = settings.get("AUTOSAVE")
     VERBOSE = settings.get("VERBOSE")
+    USE_KEEPASS_CREDENTIALS = settings.get("USE_KEEPASS_CREDENTIALS")
+    KEEPASS_DATABASE_PATH = settings.get("KEEPASS_DATABASE_PATH")
+    KEEPASS_ENTRY_TITLE = settings.get("KEEPASS_ENTRY_TITLE")
+
+    # Load credentials
+    USERNAME, PASSWORD = load_credentials(USE_KEEPASS_CREDENTIALS,
+                                          KEEPASS_DATABASE_PATH,
+                                          KEEPASS_ENTRY_TITLE)
 
     browser = webdriver.Chrome()
 
