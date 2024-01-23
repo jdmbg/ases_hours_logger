@@ -103,7 +103,8 @@ def fill_out_table(browser: webdriver,
         # Ignore if weekend or vacation day
         if (weekday_cell.text == 'Sa'
             or weekday_cell.text == 'So'
-                or absence_code_cell.text == 'U'):
+                or absence_code_cell.text == 'U'
+                or absence_code_cell.text == 'BU'):
             showMessage(verbose,
                         f"\nDay {date_cell.text} is in the weekend" +
                         " or a vacation day.\nIGNORED\n")
