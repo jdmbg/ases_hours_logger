@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import StaleElementReferenceException
 
 
 def login(browser: webdriver,
@@ -61,11 +62,18 @@ def go_to_log_hours_page(browser: webdriver):
     # Click on log_hours button
     log_hours_page_button_xpath = "//span[@class='btn-label' \
                 and text()='Erfassen Zeitbuchung']"
-    log_hours_page_button = WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.XPATH, log_hours_page_button_xpath))
-    )
-    ActionChains(browser).move_to_element(
-        log_hours_page_button).click().perform()
+    max_retries = 3
+    for _ in range(max_retries):
+        try:
+            log_hours_page_button = WebDriverWait(browser, 10).until(
+                EC.presence_of_element_located(
+                    (By.XPATH, log_hours_page_button_xpath))
+            )
+            ActionChains(browser).move_to_element(
+                log_hours_page_button).click().perform()
+            break  # Break out of the loop if the action is successful
+        except StaleElementReferenceException:
+            pass  # Retry the action on StaleElementReferenceException
 
 
 def send_keys_and_wait(actions: ActionChains, keys: str, buffer_time: int):
