@@ -101,21 +101,24 @@ def fill_out_table(browser: webdriver,
         row = table.find_elements(By.CLASS_NAME, "slick-row")[i]
 
         # Get Cell information
-        cells = row.find_elements(By.CLASS_NAME, "slick-cell")
-        date_cell = cells[0]
-        weekday_cell = cells[1]
-        absence_code_cell = cells[-1]
-        from_cell = WebDriverWait(browser, 10).until(
-            EC.element_to_be_clickable(cells[4]))
+        date_cell = row.find_elements(
+            By.CSS_SELECTOR, "div.slick-cell.l0.r0")[0]
+        weekday_cell = row.find_elements(
+            By.CSS_SELECTOR, "div.slick-cell.l1.r1")[0]
+        absence_code_cell = row.find_elements(
+            By.CSS_SELECTOR, "div.slick-cell.l2.r2")[0]
+        from_cell = row.find_elements(
+            By.CSS_SELECTOR, "div.slick-cell.l4.r4")[0]
 
-        # Ignore if weekend or vacation day
-        if (weekday_cell.text == 'Sa'
-            or weekday_cell.text == 'So'
-                or absence_code_cell.text == 'U'
-                or absence_code_cell.text == 'BU'):
+        # Ignore if weekend or not bookable
+        is_weekend = weekday_cell.text == 'Sa' or weekday_cell.text == 'So'
+        is_not_bookable = not (absence_code_cell.text == '' or
+                               absence_code_cell.text == 'XY')
+        if (is_weekend or is_not_bookable):
             showMessage(verbose,
                         f"\nDay {date_cell.text} is in the weekend" +
-                        " or a vacation day.\nIGNORED\n")
+                        " or has an absence code other than '' or 'XY." +
+                        "\nIGNORED\n")
 
         # Ignore if already set
         elif (":" in from_cell.text):
