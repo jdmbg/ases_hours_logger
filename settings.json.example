@@ -1,11 +1,14 @@
 {
   "ASES_URL": "your_ases_url",
+  "USE_ASES_CREDENTIALS": false,
+  "ASES_USERNAME": "your_ases_username",
+  "ASES_PASSWORD": "your_ases_password",
   "LOGIN_DROP_DOWN_INDEX": 5,
   "AUTOSAVE": false,
   "VERBOSE": true,
   "USE_KEEPASS_CREDENTIALS": false,
-  "KEEPASS_DATABASE_FILE_PATH": your_keepass_database_file_path,
-  "KEEPASS_ENTRY_TITLE": your_keepass_ases_entry_title,
+  "KEEPASS_DATABASE_FILE_PATH": "your_keepass_database_file_path",
+  "KEEPASS_ENTRY_TITLE": "your_keepass_ases_entry_title",
   "TIME_SLOTS": {
     "Mo": [
       "8:00",
