@@ -37,6 +37,9 @@ To run the script, follow these steps:
     | Key  | Description | Default |
     |------|-------------|---------|
     | `ASES_URL` | The URL to access the ASES webpage of your employer | `your_ases_url` |
+    | `USE_ASES_CREDENTIALS` | Boolean describing if ASES credentials are to be used | `false` |
+    | `ASES_USERNAME` | Username to your ASES account | `your_ases_username` |
+    | `ASES_PASSWORD` | Password to your ASES account | `your_ases_password` |
     | `LOGIN_DROP_DOWN_INDEX` | Index of the item to be selected in the login page drop down menu | `5` |
     | `AUTOSAVE` | For automatically saving your changes after the script run set this to `true`. Do this at your own risk | `false` |
     | `TIME_SLOTS` | Define the time slots you want to log. These assume an 8-hour shift with a 1-hour lunch break each day. On Fridays only 7 hours are booked. You can adjust this at will | see `settings.json.example` file |
@@ -54,10 +57,13 @@ To run the script, follow these steps:
     ```bash
     python3 hour_logger.py "ASES_USERNAME" "ASES_PASSWORD"
     ```
-    Or by using the credentials stored in your KeePass. Be sure to configure the setting parameters `USE_KEEPASS_CREDENTIALS`, `KEEPASS_DATABASE_FILE_PATH` and `KEEPASS_ENTRY_TITLE` accordingly. After this, run the following command:
+
+    Or by using the ASES credentials or credentials stored in your KeePass. Be sure to configure the setting parameters `USE_ASES_CREDENTIALS`, `ASES_USERNAME`, `ASES_PASSWORD`, `USE_KEEPASS_CREDENTIALS`, `KEEPASS_DATABASE_FILE_PATH` and `KEEPASS_ENTRY_TITLE` accordingly. After this, run the following command:
+
     ```bash
     python3 hour_logger.py
     ```
+
     You will be asked to enter then the KeePass master password.
 
 5. See the magic happen 🧙.

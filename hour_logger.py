@@ -19,11 +19,14 @@ except Exception as e:
     sys.exit(1)
 
 
-def load_credentials(use_keypass_credentials: bool,
+def load_credentials(use_ases_credentials: bool,
+                     ases_username: str,
+                     ases_password: str,
+                     use_keypass_credentials: bool,
                      keepass_database_file_path: str,
                      keepass_entry_title: str):
 
-    if len(sys.argv) < 3 and use_keypass_credentials is False:
+    if len(sys.argv) < 3 and use_keypass_credentials is False and use_ases_credentials is False:
         print('Usage: python script.py "USERNAME" "PASSWORD"')
         sys.exit(1)
     if use_keypass_credentials is True:
@@ -32,6 +35,8 @@ def load_credentials(use_keypass_credentials: bool,
         kp = PyKeePass(keepass_database_file_path, password=pswd)
         entry = kp.find_entries(title=keepass_entry_title, first=True)
         return entry.username, entry.password
+    if use_ases_credentials is True:
+        return ases_username, ases_password
     else:
         # Get credentials from command line arguments
         return sys.argv[1], sys.argv[2]
@@ -58,7 +63,7 @@ def load_settings():
         sys.exit(1)
 
     # Access and check all the settings data
-    settings_to_check = ["ASES_URL", "BUFFER_TIME", "LOGIN_DROP_DOWN_INDEX",
+    settings_to_check = ["ASES_URL", "USE_ASES_CREDENTIALS", "ASES_USERNAME", "ASES_PASSWORD", "BUFFER_TIME", "LOGIN_DROP_DOWN_INDEX",
                          "FINAL_WAIT_IN_SEC", "TIME_SLOTS", "AUTOSAVE",
                          "VERBOSE", "USE_KEEPASS_CREDENTIALS",
                          "KEEPASS_DATABASE_FILE_PATH", "KEEPASS_ENTRY_TITLE"]
@@ -77,6 +82,9 @@ def main():
     # Load settings
     settings = load_settings()
     ASES_URL = settings.get("ASES_URL")
+    USE_ASES_CREDENTIALS = settings.get("USE_ASES_CREDENTIALS")
+    ASES_USERNAME = settings.get("ASES_USERNAME")
+    ASES_PASSWORD = settings.get("ASES_PASSWORD")
     BUFFER_TIME = settings.get("BUFFER_TIME")
     LOGIN_DROP_DOWN_INDEX = settings.get("LOGIN_DROP_DOWN_INDEX")
     FINAL_WAIT_IN_SEC = settings.get("FINAL_WAIT_IN_SEC")
@@ -88,7 +96,10 @@ def main():
     KEEPASS_ENTRY_TITLE = settings.get("KEEPASS_ENTRY_TITLE")
 
     # Load credentials
-    USERNAME, PASSWORD = load_credentials(USE_KEEPASS_CREDENTIALS,
+    USERNAME, PASSWORD = load_credentials(USE_ASES_CREDENTIALS,
+                                          ASES_USERNAME,
+                                          ASES_PASSWORD,
+                                          USE_KEEPASS_CREDENTIALS,
                                           KEEPASS_DATABASE_FILE_PATH,
                                           KEEPASS_ENTRY_TITLE)
 
