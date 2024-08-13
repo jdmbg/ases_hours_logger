@@ -10,6 +10,8 @@ try:
     from pykeepass import PyKeePass
     from selenium import webdriver
     from selenium.common.exceptions import WebDriverException
+    from selenium.webdriver.chrome.options import Options
+
 except ModuleNotFoundError:
     print("\nA required module was not found." +
           "\nPlease run 'pip3 install -r requirements.txt'\n")
@@ -103,7 +105,10 @@ def main():
                                           KEEPASS_DATABASE_FILE_PATH,
                                           KEEPASS_ENTRY_TITLE)
 
-    browser = webdriver.Chrome()
+    # Disable search engine choice screen with Chrome and selenium 
+    chrome_options = Options()
+    chrome_options.add_argument("--disable-search-engine-choice-screen")
+    browser = webdriver.Chrome(options=chrome_options)
 
     try:
         browser.get(ASES_URL)
