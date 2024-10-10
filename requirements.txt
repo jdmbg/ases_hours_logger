@@ -1,3 +1,3 @@
-selenium==4.16.0
+selenium==4.11.2
 getpass4==0.0.14.1
 pykeepass==4.0.6
