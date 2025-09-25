@@ -26,7 +26,8 @@ def load_credentials(use_ases_credentials: bool,
                      ases_password: str,
                      use_keypass_credentials: bool,
                      keepass_database_file_path: str,
-                     keepass_entry_title: str):
+                     keepass_entry_title: str,
+                     keepass_key_file: str):
 
     if len(sys.argv) < 3 and use_keypass_credentials is False and use_ases_credentials is False:
         print('Usage: python script.py "USERNAME" "PASSWORD"')
@@ -34,7 +35,7 @@ def load_credentials(use_ases_credentials: bool,
     if use_keypass_credentials is True:
         # Get credentials from Keypass
         pswd = getpass.getpass('\nPlease enter your KeePass master password:')
-        kp = PyKeePass(keepass_database_file_path, password=pswd)
+        kp = PyKeePass(keepass_database_file_path, password=pswd, keyfile=keepass_key_file)
         entry = kp.find_entries(title=keepass_entry_title, first=True)
         return entry.username, entry.password
     if use_ases_credentials is True:
@@ -96,6 +97,7 @@ def main():
     USE_KEEPASS_CREDENTIALS = settings.get("USE_KEEPASS_CREDENTIALS")
     KEEPASS_DATABASE_FILE_PATH = settings.get("KEEPASS_DATABASE_FILE_PATH")
     KEEPASS_ENTRY_TITLE = settings.get("KEEPASS_ENTRY_TITLE")
+    KEEPASS_KEY_FILE = settings.get("KEEPASS_KEY_FILE")
 
     # Load credentials
     USERNAME, PASSWORD = load_credentials(USE_ASES_CREDENTIALS,
@@ -103,7 +105,8 @@ def main():
                                           ASES_PASSWORD,
                                           USE_KEEPASS_CREDENTIALS,
                                           KEEPASS_DATABASE_FILE_PATH,
-                                          KEEPASS_ENTRY_TITLE)
+                                          KEEPASS_ENTRY_TITLE,
+                                          KEEPASS_KEY_FILE)
 
     # Disable search engine choice screen with Chrome and selenium 
     chrome_options = Options()
