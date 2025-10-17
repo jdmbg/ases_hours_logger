@@ -46,6 +46,7 @@ To run the script, follow these steps:
     | `USE_KEEPASS_CREDENTIALS` | Boolean describing if KeePass credentials are to be used | `false` |
     | `KEEPASS_DATABASE_FILE_PATH` | Path to your KeePass database .kdbx file | `your_keepass_database_file_path` |
     | `KEEPASS_ENTRY_TITLE` | Title of the KeePass entry containing the user credentials for ASES | `your_keepass_ases_entry_title` |
+    | `KEEPASS_KEY_FILE` | Path to your KeePass key file (optional) | `your_keepass_key_file` |
     | `BUFFER_TIME` | The time in seconds that passes between each browser action. We need a bit of time between actions for performance reasons. Only adjust if needed, for example, if your internet connection is slow | `0.3` |
     | `FINAL_WAIT_IN_SEC` | The time in seconds that the browser window will remain open after completing all booking actions | `60` |
     | `VERBOSE` | Set the output of log messages for the developer mode to display more information during processing | `true` |
