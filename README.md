@@ -37,40 +37,30 @@ To run the script, follow these steps:
     | Key  | Description | Default |
     |------|-------------|---------|
     | `ASES_URL` | The URL to access the ASES webpage of your employer | `your_ases_url` |
-    | `USE_ASES_CREDENTIALS` | Boolean describing if ASES credentials are to be used | `false` |
-    | `ASES_USERNAME` | Username to your ASES account | `your_ases_username` |
-    | `ASES_PASSWORD` | Password to your ASES account | `your_ases_password` |
-    | `LOGIN_DROP_DOWN_INDEX` | Index of the item to be selected in the login page drop down menu | `5` |
+    | `COMPANY_EMAIL` | Your corporate email address used for SSO login | `your_company_email` |
     | `AUTOSAVE` | For automatically saving your changes after the script run set this to `true`. Do this at your own risk | `false` |
     | `TIME_SLOTS` | Define the time slots you want to log. These assume an 8-hour shift with a 1-hour lunch break each day. On Fridays only 7 hours are booked. You can adjust this at will | see `settings.json.example` file |
-    | `USE_KEEPASS_CREDENTIALS` | Boolean describing if KeePass credentials are to be used | `false` |
-    | `KEEPASS_DATABASE_FILE_PATH` | Path to your KeePass database .kdbx file | `your_keepass_database_file_path` |
-    | `KEEPASS_ENTRY_TITLE` | Title of the KeePass entry containing the user credentials for ASES | `your_keepass_ases_entry_title` |
-    | `KEEPASS_KEY_FILE` | Path to your KeePass key file (optional) | `your_keepass_key_file` |
     | `BUFFER_TIME` | The time in seconds that passes between each browser action. We need a bit of time between actions for performance reasons. Only adjust if needed, for example, if your internet connection is slow | `0.3` |
     | `FINAL_WAIT_IN_SEC` | The time in seconds that the browser window will remain open after completing all booking actions | `60` |
     | `VERBOSE` | Set the output of log messages for the developer mode to display more information during processing | `true` |
 
-3. Connect to your employers VPN if necessary.
+3. Connect to your employer's VPN if necessary.
 
-4. Run the script. You can do this by giving the username and password as command line arguments:
-
-    ```bash
-    python3 hour_logger.py "ASES_USERNAME" "ASES_PASSWORD"
-    ```
-
-    Or by using the ASES credentials or credentials stored in your KeePass. Be sure to configure the setting parameters `USE_ASES_CREDENTIALS`, `ASES_USERNAME`, `ASES_PASSWORD`, `USE_KEEPASS_CREDENTIALS`, `KEEPASS_DATABASE_FILE_PATH` and `KEEPASS_ENTRY_TITLE` accordingly. After this, run the following command:
+4. Run the script:
 
     ```bash
     python3 hour_logger.py
     ```
 
-    You will be asked to enter then the KeePass master password.
+5. The script will automatically fill in your corporate email and click Next on the SSO login page. You will then need to **manually select your certificate and click OK**.
 
-5. See the magic happen 🧙.
+6. If prompted with a "Stay signed in?" page, the script will automatically click Yes.
 
-6. Ensure everything was logged correctly and **manually click on the "SAVE" button** (or activate the `AUTOSAVE` setting at your own risk).
+7. See the magic happen 🧙.
+
+8. Ensure everything was logged correctly and **manually click on the "SAVE" button** (or activate the `AUTOSAVE` setting at your own risk).
 
 Feel free to customize the settings to match your specific needs. If you encounter any issues, consider adjusting the waiting times or reaching out for support. Happy logging!
 
 <a href='https://ko-fi.com/jdmbg' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
+</a>

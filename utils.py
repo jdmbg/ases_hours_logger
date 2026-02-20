@@ -8,51 +8,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import StaleElementReferenceException
 
 
-def login(browser: webdriver,
-          ases_url: str,
-          username: str,
-          password: str,
-          drop_down_index: int):
-    # Wait for the iframe to be present on the page
+def go_to_log_hours_page(browser: webdriver):
+    # Switch into the application iframe
     iframe = WebDriverWait(browser, 10).until(
         EC.presence_of_element_located((By.ID, 'applicationIframe'))
     )
-    # Switch to the iframe
     browser.switch_to.frame(iframe)
 
-    # Get necessary elements
-    user_field_xpath = "//input[@class='z-focustextbox-real' \
-        and @placeholder='Benutzername']"
-    user_field = WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.XPATH, user_field_xpath)))
-
-    password_field_xpath = "//input[@class='z-focustextbox-real' \
-        and @placeholder='Kennwort']"
-    password_field = WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.XPATH, password_field_xpath)))
-
-    drop_down_xpath = "//input[@placeholder='Mandant']"
-    drop_down = WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.XPATH, drop_down_xpath)))
-
-    login_button = WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "btn-login")))
-
-    # Fill out form and login
-    user_field.send_keys(username)
-    password_field.send_keys(password)
-    drop_down.click()
-
-    # If ClientNo not specified in the ases_url -> select manually
-    if "ClientNo" not in ases_url:
-        # Press the down arrow drop_down_index times to reach the desired item
-        for _ in range(drop_down_index):
-            drop_down.send_keys(Keys.ARROW_DOWN)
-        drop_down.send_keys(Keys.ENTER)
-    login_button.click()
-
-
-def go_to_log_hours_page(browser: webdriver):
     # Click on nav_menu button
     nav_menu = WebDriverWait(browser, 10).until(
         EC.element_to_be_clickable((By.ID, 'nav_menu'))
