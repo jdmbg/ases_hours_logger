@@ -1,46 +1,14 @@
 {
   "ASES_URL": "your_ases_url",
-  "USE_ASES_CREDENTIALS": false,
-  "ASES_USERNAME": "your_ases_username",
-  "ASES_PASSWORD": "your_ases_password",
-  "LOGIN_DROP_DOWN_INDEX": 5,
+  "COMPANY_EMAIL": "your_company_email",
   "AUTOSAVE": false,
   "VERBOSE": true,
-  "USE_KEEPASS_CREDENTIALS": false,
-  "KEEPASS_DATABASE_FILE_PATH": "your_keepass_database_file_path",
-  "KEEPASS_ENTRY_TITLE": "your_keepass_ases_entry_title",
-  "KEEPASS_KEY_FILE": "your_keepass_key_file",
   "TIME_SLOTS": {
-    "Mo": [
-      "8:00",
-      "12:00",
-      "13:00",
-      "17:00"
-    ],
-    "Di": [
-      "8:00",
-      "12:00",
-      "13:00",
-      "17:00"
-    ],
-    "Mi": [
-      "8:00",
-      "12:00",
-      "13:00",
-      "17:00"
-    ],
-    "Do": [
-      "8:00",
-      "12:00",
-      "13:00",
-      "17:00"
-    ],
-    "Fr": [
-      "8:00",
-      "12:00",
-      "13:00",
-      "16:00"
-    ]
+    "Mo": ["8:00", "12:00", "13:00", "17:00"],
+    "Di": ["8:00", "12:00", "13:00", "17:00"],
+    "Mi": ["8:00", "12:00", "13:00", "17:00"],
+    "Do": ["8:00", "12:00", "13:00", "17:00"],
+    "Fr": ["8:00", "12:00", "13:00", "16:00"]
   },
   "BUFFER_TIME": 0.3,
   "FINAL_WAIT_IN_SEC": 60

@@ -5,6 +5,9 @@
 # No JSON Files
 *.json
 
+# Python env
+/myenv
+
 #Python Cache
 __pycache__
 
