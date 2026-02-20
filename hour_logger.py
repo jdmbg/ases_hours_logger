@@ -76,13 +76,19 @@ def handle_sso_login(browser, company_email: str):
 
 
 def handle_stay_signed_in(browser):
-    """Click Yes on the 'Stay signed in?' page if it appears."""
+    """Click the confirm button on the Stay signed in page if it appears.
+    Uses the page ID instead of button text to be language-agnostic."""
     try:
-        yes_button = WebDriverWait(browser, 10).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "input[value='Yes']"))
+        # Wait for the Stay signed in page by its unique form ID
+        WebDriverWait(browser, 10).until(
+            EC.presence_of_element_located((By.ID, "KmsiCheckboxField"))
+        )
+        # Click the primary submit button (Yes/Ja) regardless of language
+        yes_button = WebDriverWait(browser, 5).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "input[type='submit']"))
         )
         yes_button.click()
-        print("Stay signed in: clicked Yes.")
+        print("Stay signed in: clicked confirm button.")
     except TimeoutException:
         pass  # Page did not appear, continue normally
 
