@@ -115,10 +115,10 @@ def main():
     AUTOSAVE = settings.get("AUTOSAVE")
     VERBOSE = settings.get("VERBOSE")
 
-    # Use Chrome
-    chrome_options = Options()
-    chrome_options.add_argument("--disable-search-engine-choice-screen")
-    browser = webdriver.Chrome(options=chrome_options)
+    # Use Edge
+    edge_options = Options()
+    edge_options.add_argument("--disable-search-engine-choice-screen")
+    browser = webdriver.Edge(options=edge_options)
 
     try:
         browser.get(ASES_URL)
